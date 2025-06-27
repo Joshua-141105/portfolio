@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
+import Navbar from './components/Navbar';
 import Header from './components/Header';
 import About from './components/About';
 import Skills from './components/Skills';
@@ -23,17 +24,16 @@ function App() {
   const contactRef = useRef(null);
 
   useEffect(() => {
-    // Create a context to properly handle GSAP animations
     const ctx = gsap.context(() => {
-      // Header animation with a slight delay to ensure proper mounting
+      // Animate header on load
       gsap.fromTo(headerRef.current,
         { y: -50, opacity: 0 },
-        { 
-          y: 0, 
-          opacity: 1, 
+        {
+          y: 0,
+          opacity: 1,
           duration: 1,
           ease: "power3.out",
-          delay: 0.2 // Small delay to ensure proper mounting
+          delay: 0.2
         }
       );
 
@@ -61,7 +61,7 @@ function App() {
               opacity: 1,
               duration: 0.8,
               ease: "power3.out",
-              delay: 0.1 * index // Stagger the animations slightly
+              delay: 0.1 * index
             }
           );
         }
@@ -87,17 +87,17 @@ function App() {
       });
     });
 
-    // Cleanup function to prevent memory leaks
     return () => {
-      ctx.revert(); // This will clean up all GSAP animations
+      ctx.revert();
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
-  }, []); // Empty dependency array to run only once on mount
+  }, []);
 
   return (
     <div className="bg-gray-100 min-h-screen">
-      <Header ref={headerRef} />
+      <Navbar />
       <main>
+        <Header ref={headerRef} />
         <About ref={aboutRef} />
         <Skills ref={skillsRef} />
         <Education ref={educationRef} />

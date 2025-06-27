@@ -51,19 +51,24 @@ const Contact = forwardRef((props, ref) => {
           <div className="md:w-1/2">
             <form
   onSubmit={(e) => {
-    e.preventDefault();
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const subject = e.target.subject.value;
-    const message = e.target.message.value;
+  e.preventDefault();
 
-    const body = `Name: ${name}%0AEmail: ${email}%0AMessage: ${message}`;
-    const mailtoLink = `mailto:727823tucs122@skct.edu.in?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-    window.location.href = mailtoLink;
-    const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=727823tucs122@skct.edu.in&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
-window.open(gmailLink, '_blank');
+  const name = e.target.name.value;
+  const email = e.target.email.value;
+  const subject = e.target.subject.value;
+  const message = e.target.message.value;
 
-  }}
+  const body = `Name: ${name}\nEmail: ${email}\nMessage: ${message}`;
+  const subjectEncoded = encodeURIComponent(subject);
+  const bodyEncoded = encodeURIComponent(body);
+
+  const gmailLink = `https://mail.google.com/mail/?view=cm&fs=1&to=727823tucs122@skct.edu.in&su=${subjectEncoded}&body=${bodyEncoded}`;
+  window.open(gmailLink, '_blank');
+
+  // ✅ Reset the form after sending
+  e.target.reset();
+}}
+
   className="bg-white text-gray-800 p-6 rounded-lg shadow-md"
 >
   <h3 className="text-xl font-semibold mb-6 text-blue-900">Send Me a Message</h3>
