@@ -6,6 +6,7 @@ const Education = forwardRef((props, ref) => {
     <section id="education" ref={ref} className="py-16 bg-white">
       <div className="container mx-auto px-4 md:px-8">
         <h2 className="text-3xl font-bold mb-8 text-center text-blue-900">Education</h2>
+        
         <div className="space-y-8">
           <EducationCard 
             institution="Sri Krishna College of Technology, Coimbatore"
@@ -30,7 +31,8 @@ const Education = forwardRef((props, ref) => {
             description="Completed my schooling with excellent academic performance, laying a strong foundation for my higher education in engineering."
           />
         </div>
-        
+
+        {/* Certifications */}
         <div className="mt-12">
           <h3 className="text-xl font-semibold mb-6 text-blue-800">Certifications</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -55,8 +57,9 @@ const Education = forwardRef((props, ref) => {
 
 const EducationCard = ({ institution, degree, period, grades, icon, description }) => (
   <div className="bg-gray-50 p-6 rounded-lg shadow-md hover:shadow-lg transition duration-300">
-    <div className="flex flex-col md:flex-row md:items-center justify-between mb-4">
-      <div className="flex items-start mb-4 md:mb-0">
+    <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4 mb-4">
+      {/* Left: Icon + Institution */}
+      <div className="flex items-start">
         <div className="bg-blue-100 p-3 rounded-full mr-4">
           {icon}
         </div>
@@ -65,9 +68,13 @@ const EducationCard = ({ institution, degree, period, grades, icon, description 
           <p className="text-gray-600">{degree}</p>
         </div>
       </div>
-      <div className="text-right">
-        <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">{period}</span>
-        {typeof grades === 'string' ? <p className="text-gray-600 mt-2">{grades}</p> : grades}
+
+      {/* Right: Period + Grades */}
+      <div className="flex flex-col items-start md:items-end text-sm">
+        <span className="bg-blue-100 text-blue-800 px-3 py-1 rounded-full">{period}</span>
+        {typeof grades === 'string'
+          ? <p className="text-gray-600 mt-1">{grades}</p>
+          : grades}
       </div>
     </div>
     <p className="text-gray-700">{description}</p>
